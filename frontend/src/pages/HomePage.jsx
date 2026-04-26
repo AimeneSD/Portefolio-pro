@@ -5,6 +5,7 @@ import SkillGrid from '../components/SkillGrid';
 import Socials from '../components/Socials';
 import { useLottie } from 'lottie-react';
 import AnimatedWaves from '../assets/wave_animation.json';
+import MachaButton from '../components/MachaButton';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -37,7 +38,7 @@ export default function HomePage() {
         <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 opacity-15 z-[0] pointer-events-none">
           {WaveAnimation}
         </div>
-        <div className="flex flex-col z-0 justify-center items-start mr-auto mt-[300px] gap-5 ml-[250px] max-lg:mr-0">
+        <div className="flex flex-col z-0 justify-center items-start mr-auto mt-[300px] gap-5 ml-[10vw] max-lg:mr-0">
           <div className="flex-1 flex flex-col  gap-y-5">
             <h1 className="text-[250%] text-text-primary font-bold leading-tight">
             <span className="green-text text-7xl">Aïmène SAOUD</span>
@@ -47,16 +48,10 @@ export default function HomePage() {
               <span className="green-text">développement d'applications</span>.
             </h2>
             <p className="text-text-secondary max-w-[700px]">
-              Étudiant en BTS SIO,<br /> je souhaite apporter des solutions de developpement, d'infrastructure, de sécurité et de conformité aux organisations.
+              Je souhaite apporter des solutions de developpement, d'infrastructure, de sécurité et de conformité aux organisations.
             </p>
           </div>
-          <a
-            href="#contacts"
-            className="self-start px-4 py-2 mt-15 border border-accent rounded-full text-text-primary transition-colors duration-500 hover:bg-accent-hover"
-            id="cta-contact"
-          >
-            Contacter =&gt;
-          </a>
+          <MachaButton label="Contacter =>" href="#contacts" />
         </div>
         
       </section>

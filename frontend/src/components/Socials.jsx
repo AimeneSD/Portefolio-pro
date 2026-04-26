@@ -54,28 +54,31 @@ const Socials = () => {
         const bgStyle = { backgroundColor: s.color };
 
         return (
-          <li key={s.id} className="relative group mx-2.5 py-2">
+          <li key={s.id} className="relative mx-2.5 py-2">
             <a
               aria-label={s.label}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative overflow-hidden flex justify-center items-center w-[50px] h-[50px] rounded-full text-[#4d4d4d] bg-white transition-all duration-300 ease-in-out hover:text-white hover:shadow-[3px_2px_45px_0px_rgba(0,0,0,0.12)]"
+              className="group relative flex justify-center items-center w-[50px] h-[50px] text-[#4d4d4d] transition-all duration-300 ease-in-out hover:text-white hover:shadow-[3px_2px_45px_0px_rgba(0,0,0,0.12)]"
             >
-              {/* Filled background animation */}
+              {/* Icon wrapper — clips the fill animation */}
+              <div className="relative overflow-hidden flex justify-center items-center w-full h-full rounded-full bg-white">
+                {/* Filled background animation — right to left */}
+                <div
+                  className="absolute top-0 right-0 h-full w-0 transition-all duration-300 ease-in-out group-hover:w-full"
+                  style={bgStyle}
+                />
+                {s.svg}
+              </div>
+              {/* Tooltip */}
               <div
-                className="absolute bottom-0 left-0 w-full h-0 transition-all duration-300 ease-in-out group-hover:h-full"
+                className="pointer-events-none absolute top-full right-[150%] translate-y-[200%] text-white px-2.5 py-1.5 rounded-[5px] opacity-0 invisible text-sm whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:visible group-hover:-top-[50px]"
                 style={bgStyle}
-              />
-              {s.svg}
+              >
+                {s.label}
+              </div>
             </a>
-            {/* Tooltip */}
-            <div
-              className="absolute top-full right-[150%] translate-y-[200%] text-white px-2.5 py-1.5 rounded-[5px] opacity-0 invisible text-sm transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:visible group-hover:-top-[50px]"
-              style={bgStyle}
-            >
-              {s.label}
-            </div>
           </li>
         );
       })}

@@ -41,7 +41,7 @@ export default function ContactPage() {
 
   return (
     <main className="w-[70vw] max-w-3xl flex flex-col gap-[100px] self-center mt-[90px] mb-[80px] items-center max-lg:w-[90vw]">
-      <section className="flex flex-col gap-10 w-full" id="contact-form-section">
+      <section className="flex flex-col mt-[60px]  gap-10 w-full" id="contact-form-section">
         <div>
           <h1 className="text-4xl font-semibold text-text-primary">
             <span className="green-text">/</span>collaborons

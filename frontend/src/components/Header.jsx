@@ -14,10 +14,10 @@ export default function Header() {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 w-full h-[70px] bg-bg-primary z-1000 flex items-center">
-      <nav className="relative flex justify-center items-center gap-[600px] w-full px-6 lg:px-[225px] z-1001">
+    <header className="fixed top-0 w-full h-[70px]  z-1000 flex items-center">
+      <nav className="relative flex justify-center items-center  w-full lg:gap-x-[10vw]  lg:px-[225px] z-1001">
         {/* ─── Logo + Titre ───────────────── */}
-        <Link to="/" className="flex items-center gap-2.5" id="header-logo">
+        <Link to="/" className="flex items-center gap-2.5 ml-[2vw]" id="header-logo">
           <img
             className="w-10 h-auto object-contain invert"
             src="/images/portfolio_icon.webp"
@@ -28,7 +28,7 @@ export default function Header() {
 
         {/* ─── Hamburger (mobile) ─────────── */}
         <button
-          className="flex lg:hidden flex-col gap-[5px] ml-auto cursor-pointer z-1200"
+          className="flex lg:hidden flex-col gap-[5px] mr-[4vw]  ml-auto cursor-pointer z-1200"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu de navigation"
           id="hamburger"
@@ -42,7 +42,7 @@ export default function Header() {
         <ul
           className={`
             lg:flex lg:ml-auto lg:flex-row lg:gap-[30px] lg:static lg:h-auto lg:w-auto lg:bg-transparent
-            fixed top-0 right-0 h-screen w-full bg-bg-primary
+            fixed max-lg:gap-y-15 max-lg:text-2xl   top-0 right-0 h-screen w-full bg-bg-primary
             flex flex-col items-center justify-center gap-8
             transition-transform duration-400 ease-in-out z-[1050]
             ${menuOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
