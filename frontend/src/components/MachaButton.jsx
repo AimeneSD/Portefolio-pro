@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const MachaButton = ({ label = "Label" , href = "#" }) => {
+const MachaButton = ({ label = "Label", href, to, extraClassName }) => {
   const [flairPos, setFlairPos] = useState({ x: 0, y: 0, scale: 0 });
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    // On calcule la position de la souris par rapport au bouton
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setFlairPos({ x, y, scale: 1 });
@@ -15,14 +15,10 @@ const MachaButton = ({ label = "Label" , href = "#" }) => {
     setFlairPos((prev) => ({ ...prev, scale: 0 }));
   };
 
-  return (
-    <a
-      href="#"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative inline-flex items-center justify-center px-10 py-4 overflow-hidden font-medium tracking-wide text-green-200 bg-transparent border-2 border-green-700 rounded-full group transition-colors duration-300 hover:text-white"
-      style={{ isolation: 'isolate' }}
-    >
+  const className = "relative  " + extraClassName + " inline-flex items-center justify-center px-10 py-4 overflow-hidden font-medium tracking-wide text-green-200 bg-transparent border-2 border-green-700 rounded-full group transition-colors duration-300 hover:text-white";
+
+  const children = (
+    <>
       {/* La "bulle" (le flair) qui suit la souris */}
       <span
         className="absolute inset-0 z-0 pointer-events-none transition-transform duration-500 ease-out"
@@ -42,6 +38,32 @@ const MachaButton = ({ label = "Label" , href = "#" }) => {
       <span className="relative z-10 uppercase text-sm font-bold">
         {label}
       </span>
+    </>
+  );
+
+  if (to) {
+    return (
+      <Link
+        to={to}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className={className}
+        style={{ isolation: 'isolate' }}
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href || "#"}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+      style={{ isolation: 'isolate' }}
+    >
+      {children}
     </a>
   );
 };

@@ -1,12 +1,12 @@
 export default function VeillePage() {
   return (
-    <main className="w-[70vw] max-w-7xl flex flex-col gap-[100px] self-center mt-[90px] mb-[80px] max-lg:w-[90vw] max-lg:mt-[90px]">
-      <section id="veille-techno">
+    <main className="  flex flex-col gap-[100px] self-center mt-[90px] mb-[80px] max-lg:w-[90vw] max-lg:mt-[90px]">
+      <section id="veille-techno" className=" flex flex-col items-center">
         <h1 className="text-4xl font-semibold text-text-primary mb-10">
           <span className="green-text">/</span>tableau de veille technologique
         </h1>
 
-        <div className="overflow-x-auto">
+        <div className="max-w-7xl">
           <table className="w-full border-collapse border border-border text-sm text-text-secondary">
             <tbody>
               {/* Objectif */}

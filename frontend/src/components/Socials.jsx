@@ -48,7 +48,7 @@ const socials = [
 
 const Socials = () => {
   return (
-    <ul className="flex flex-col fixed top-4/5 right-0 -translate-y-1/2 items-center gap-0 list-none">
+    <ul className="flex flex-col fixed top-4/5 right-0 mr-4 -translate-y-1/2 items-center gap-0 list-none z-10">
       {socials.map((s) => {
         const bg = s.color;
         const bgStyle = { backgroundColor: s.color };
@@ -60,10 +60,10 @@ const Socials = () => {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex justify-center items-center w-[50px] h-[50px] text-[#4d4d4d] transition-all duration-300 ease-in-out hover:text-white hover:shadow-[3px_2px_45px_0px_rgba(0,0,0,0.12)]"
+              className="group relative flex justify-center items-center w-[50px] h-[50px] text-[#4d4d4d] transition-all duration-300 ease-in-out hover:text-white "
             >
               {/* Icon wrapper — clips the fill animation */}
-              <div className="relative overflow-hidden flex justify-center items-center w-full h-full rounded-full bg-white">
+              <div className="relative overflow-hidden flex justify-center items-center w-full h-full rounded-full hover:shadow-[3px_2px_45px_0px_rgba(0,255,0,0.15)] bg-white">
                 {/* Filled background animation — right to left */}
                 <div
                   className="absolute top-0 right-0 h-full w-0 transition-all duration-300 ease-in-out group-hover:w-full"
@@ -73,7 +73,7 @@ const Socials = () => {
               </div>
               {/* Tooltip */}
               <div
-                className="pointer-events-none absolute top-full right-[150%] translate-y-[200%] text-white px-2.5 py-1.5 rounded-[5px] opacity-0 invisible text-sm whitespace-nowrap transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:visible group-hover:-top-[50px]"
+                className="pointer-events-none absolute top-1/2 -translate-y-1/2 right-[calc(100%+12px)] opacity-0 invisible text-white px-2.5 py-1.5 rounded-[5px] text-sm whitespace-nowrap transition-all duration-300 ease-in-out translate-x-2 group-hover:opacity-100 group-hover:visible group-hover:translate-x-0"
                 style={bgStyle}
               >
                 {s.label}

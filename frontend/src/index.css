@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/oswald/wght.css';
+@import '@fontsource/space-grotesk';
 
 /* ═══════════════════════════════════════════════ */
 /*              THÈME CUSTOM PORTFOLIO             */
@@ -11,7 +12,7 @@
   --color-accent: #2db129;
   --color-accent-hover: #4da44d;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #a3a3a3;
+  --color-text-secondary: #dedede;
   --color-border: #1e1e1e;
   --color-success: #54d200;
   --color-btn-blue: #47c9ff;
@@ -55,6 +56,14 @@
     font-family: 'Oswald Variable', sans-serif;
   }
 
+  .oswald-font{
+    font-family: 'Oswald Variable', sans-serif;
+  }
+
+  .grotesk-font{
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
@@ -75,6 +84,10 @@
 /* ─── Utilitaires ──────────────────────────────── */
 .green-text {
   color: var(--color-accent);
+}
+
+.macha-text-green {
+  color:  #abff84;
 }
 
 /* ─── Scrollbar custom ─────────────────────────── */
