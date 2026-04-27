@@ -6,7 +6,14 @@ const ProjectModel = require('../Model/ProjectModel');
  */
 async function createProject(req, res) {
   try {
-    const { titre, description, categorie, technos, lien, image } = req.body;
+    const { titre, description, categorie, technos } = req.body;
+    let lien = req.body.lien;
+    
+    if (req.files && req.files['pdf']) {
+      lien = 'documents/' + req.files['pdf'][0].filename;
+    }
+
+    const image = req.files && req.files['image'] ? req.files['image'][0].filename : req.body.image;
 
     if (!titre) {
       return res.status(400).json({ error: 'Le titre est obligatoire.' });

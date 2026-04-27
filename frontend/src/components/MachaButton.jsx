@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const MachaButton = ({ label = "Label", href, to, extraClassName }) => {
+const MachaButton = ({ label = "Label", href, to, extraClassName, onClick, type }) => {
   const [flairPos, setFlairPos] = useState({ x: 0, y: 0, scale: 0 });
 
   const handleMouseMove = (e) => {
@@ -55,16 +55,31 @@ const MachaButton = ({ label = "Label", href, to, extraClassName }) => {
     );
   }
 
+  if (href) {
+    return (
+      <a
+        href={href}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className={className}
+        style={{ isolation: 'isolate' }}
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a
-      href={href || "#"}
+    <button
+      type={type || "button"}
+      onClick={onClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={className}
       style={{ isolation: 'isolate' }}
     >
       {children}
-    </a>
+    </button>
   );
 };
 

@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 const navLinks = [
   { path: '/', label: 'accueil', id: 'home' },
   { path: '/projets', label: 'projets', id: 'projects' },
-  { path: '/contact', label: 'contact', id: 'contact' },
   { path: '/veille', label: 'veille', id: 'veille' },
   { path: '/stage', label: 'stage', id: 'stage' },
 ];
@@ -80,12 +79,12 @@ export default function Header() {
                 <Link
                   to={link.path}
                   className={`flex items-center transition-all duration-300 hover:scale-110 ${
-                    isActive ? 'macha-text-green' : 'text-gray-400 hover:macha-text-green'
+                    isActive ? 'macha-text-green' : 'text-gray-400 hover:text-green-500'
                   }`}
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="text-green-500 mr-1">#</span>
-                  <span>{link.label}</span>
+                  <span className="text-green-500 mr-1">/</span>
+                  <span className="grotesk-font">{link.label}</span>
                 </Link>
               </li>
             );

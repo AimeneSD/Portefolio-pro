@@ -13,7 +13,7 @@ export default function ProjectCard({ projet }) {
 
   return (
     <div
-      className="flex flex-col border border-border transition-transform duration-500 hover:scale-[1.03] h-[500px]"
+      className="flex flex-col border border-border transition-transform duration-500 hover:scale-[1.03] h-auto"
       id={`project-card-${projet.id}`}
     >
       <a href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full">
@@ -25,20 +25,28 @@ export default function ProjectCard({ projet }) {
         />
 
         {/* Contenu texte */}
-        <div className="flex flex-col flex-1 min-h-[150px] border-y border-border">
+        <div className="flex flex-col flex-1 min-h-[150px] border-border">
           <div className="text-[140%] text-text-primary mx-5 mt-2.5">{projet.titre}</div>
           <p className="text-text-secondary mx-5 mt-2.5">{projet.description}</p>
         </div>
 
         {/* Logos technos */}
-        <div className="flex mt-auto pb-2.5">
-          <div className="flex mt-2.5 ml-2.5 gap-[5px]">
+        <div className="flex ml-5 mb-2.5 ">
+          <div className="flex   gap-x-5">
             {techLogos.map((tech) => (
               <img
                 key={tech}
-                src={`/logo/${tech}_logo.webp`}
+                src={`/logo/${tech}.svg`}
+                onError={(e) => {
+                  if (e.target.src.endsWith('.svg')) {
+                    e.target.src = `/logo/${tech}.webp`;
+                  } else {
+                    e.target.style.display = 'none';
+                  }
+                }}
                 className="h-10 w-10 object-contain"
                 alt={tech}
+                title={tech}
               />
             ))}
           </div>

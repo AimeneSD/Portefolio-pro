@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
  */
 const skillCategories = [
   {
-    title: 'Front-end',
+    title: 'FRONT-END',
     skills: [
       { name: 'JavaScript', logo: 'js' },
       { name: 'React', logo: 'react' },
@@ -16,7 +16,7 @@ const skillCategories = [
     ],
   },
   {
-    title: 'Back-end',
+    title: 'BACK-END',
     skills: [
       { name: 'PHP', logo: 'php'},
       { name: 'Node.js', logo: 'nodejs' },
@@ -24,21 +24,21 @@ const skillCategories = [
     ],
   },
   {
-    title: 'Database',
+    title: 'DATABASE',
     skills: [
       { name: 'MySQL', logo: 'mysql' },
       { name: 'MariaDB', logo: 'mariadb' }
     ],
   },
   {
-    title: 'Infrastructure',
+    title: 'INFRASTRUCTURE',
     skills: [
       { name: 'Linux', logo: 'linux' },
       { name: 'Windows Server', logo: 'windows' },
     ],
   },
   {
-    title: 'Devops',
+    title: 'DEVOPS',
     skills: [
       {name: 'Docker',logo: 'docker'},
       { name: 'Bash', logo: 'bash' },
@@ -46,7 +46,7 @@ const skillCategories = [
     ]
   },
   {
-    title: 'Conformité & Méthodes',
+    title: 'CONFORMITÉ & MÉTHODES',
     skills: [
       { name: 'Conformité RGPD', logo: 'lock' },
       { name: 'Méthodes Agiles', logo: 'agile', ext: 'webp' },
@@ -58,7 +58,7 @@ const skillCategories = [
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SkillGrid({ showLevel = false }) {
+export default function SkillGrid({ showLevel = false, extraClassName = '' }) {
   const containerRef = useRef(null);
   const categoryRefs = useRef([]);
 
@@ -79,7 +79,7 @@ export default function SkillGrid({ showLevel = false }) {
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 0.5,
             stagger: 0.1,
             ease: 'power3.out',
             scrollTrigger: {
@@ -96,28 +96,28 @@ export default function SkillGrid({ showLevel = false }) {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col gap-y-[5vh] w-full justify-center">
+    <div ref={containerRef} className={`flex flex-col gap-y-16 lg:gap-y-[10vh] w-full items-center justify-center ${extraClassName}`}>
       {skillCategories.map((cat, index) => (
         <div 
           key={cat.title} 
           ref={(el) => (categoryRefs.current[index] = el)}
-          className="flex gap-x-[5vw]"
+          className="flex flex-col lg:flex-row gap-8 lg:gap-x-[5vw] items-center lg:items-start w-full max-w-5xl px-5"
         >
-          <h3 className="text-5xl text-text-primary oswald-font text-center max-w-[20vw] w-[20vw] font-bold mb-2">
+          <h3 className="text-4xl lg:text-5xl text-neutral-300 oswald-font text-center lg:text-left lg:max-w-[20vw] lg:w-[20vw] font-bold mb-2">
             {cat.title}
           </h3>
-          <div className="grid grid-cols-4 gap-x-20 justify-items-center content-start">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-8 lg:gap-x-20 justify-items-center content-start w-full">
             {cat.skills.map((skill) => (
               <div
                 key={skill.name}
-                className="skill-item flex items-center gap-x-4 justify-center mt-[5px]"
+                className="skill-item flex flex-col md:flex-row items-center gap-4 justify-center"
               >
                 <img
-                  className="h-15 w-10 object-contain"
+                  className="h-12 w-10 md:h-15 md:w-10 object-contain"
                   src={`/logo/${skill.logo}.${skill.ext || 'svg'}`}
                   alt={`${skill.name} Logo`}
                 />
-                <h4 className="text-text-primary max-w-16 grotesk-font text-lg ">{skill.name}</h4>
+                <h4 className="text-text-primary text-center md:text-left max-w-20 grotesk-font text-sm md:text-lg">{skill.name}</h4>
               </div>
             ))}
           </div>

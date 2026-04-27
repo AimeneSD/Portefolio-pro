@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectCard from '../components/ProjectCard';
@@ -16,6 +16,36 @@ export default function HomePage() {
   const sectionsRef = useRef([]);
   const [projets, setProjets] = useState([]);
 
+  // --- Contact Form State ---
+  const [formData, setFormData] = useState({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '' });
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+    try {
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setStatus('success');
+        setFormData({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Options de la wave animation
   const lottieOptions = {animationData: AnimatedWaves,loop: true,};
   const { View: WaveAnimation, setSpeed } = useLottie(lottieOptions, { style: { height: '100%', width: '100%', transform: 'scale(2)' } });
@@ -31,41 +61,55 @@ export default function HomePage() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
-    const ctx = gsap.context(() => {
+    let mm = gsap.matchMedia();
+
+    // On n'applique cet effet lourd que sur les grands écrans (PC/Tablettes larges)
+    mm.add("(min-width: 1024px)", () => {
       sectionsRef.current.forEach((section) => {
         if (section) {
-          ScrollTrigger.create({
-            trigger: section,
-            start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
-            pin: true,
-            pinSpacing: false,
-            invalidateOnRefresh: true,
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
+              end: () => `+=${window.innerHeight}`, // La durée de l'effet correspond à la hauteur de l'écran
+              pin: true,
+              pinSpacing: false,
+              scrub: 1, // On ajoute un scrub de 1 seconde pour lisser le mouvement
+              invalidateOnRefresh: true,
+            }
+          });
+
+          // Parallax effect: We move the children of the section upwards slowly
+          // This gives the impression that the section continues to scroll, but slower
+          tl.to(section.children, {
+            y: () => -window.innerHeight * 0.4, // Remonte de 40% de la taille de l'écran
+            ease: "none"
           });
         }
       });
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
     <>
       <main className="flex flex-col  w-full mb-[80px] ">
-      {/* ─── SECTION PRÉSENTATION ──────────────────── */}
-      <section ref={(el) => (sectionsRef.current[0] = el)} className="relative flex flex-col gap-10 min-h-screen bg-mist-950 justify-center max-lg:flex-col overflow-hidden z-[1]" id="presentation">
-        {/* ─── Wave Animation Background ──── */}
+      {/* ---- SECTION PRÉSENTATION ------------------- */}
+      <section ref={(el) => (sectionsRef.current[0] = el)} className="relative flex flex-col gap-10 min-h-screen lg:min-h-[125vh] bg-mist-950 justify-center max-lg:flex-col  overflow-hidden z-[1]" id="presentation">
+        {/* ---- Wave Animation Background ──── */}
         <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 opacity-15 z-0 pointer-events-none">
           {WaveAnimation}
         </div>
-        <div className="flex flex-col z-0 justify-center items-start mr-auto mt-[300px] gap-y-10 ml-[10vw] max-lg:mr-0">
-          <div className="flex-1 flex flex-col  gap-y-5">
-            <h1 className="text-text-primary font-bold leading-tight">
-            <span className="macha-text-green text-9xl">Aïmène SAOUD</span>
+        <div className="flex flex-col z-0 justify-center items-center md:items-start mr-auto gap-y-10 px-5 md:ml-[10vw] max-lg:mr-0 mt-[10vh] md:mt-0 w-full md:w-auto">
+          <div className="flex-1 flex flex-col gap-y-5 items-center md:items-start">
+            <h1 className="text-text-primary max-w-full lg:max-w-[400px] font-bold leading-tight text-center md:text-left">
+            <span className="macha-text-green text-6xl sm:text-7xl md:text-9xl">Aïmène SAOUD</span>
             </h1>
-            <h2 className="text-2xl text-text-primary">
+            <h2 className="text-xl md:text-2xl text-text-primary text-center md:text-left">
               Technicien spécialisé dans les <span className="macha-text-green">services informatiques</span>
             </h2>
-            <p className="text-text-secondary text-lg max-w-[700px]">
+            <p className="text-text-secondary text-base md:text-lg max-w-[700px] text-center md:text-left">
               Je conçois des écosystèmes numériques en assemblant le développement applicatif, l'infrastructure système, la sécurité et la conformité des données.
             </p>
           </div>
@@ -74,22 +118,22 @@ export default function HomePage() {
         
       </section>
 
-      {/* ─── SECTION COMPÉTENCES ───────────────────── */}
-      <section ref={(el) => (sectionsRef.current[1] = el)} className="relative bg-black flex flex-col items-center justify-start pt-[15vh] gap-10 w-full min-h-[125vh] z-2" id="skills">
-        <div className="flex flex-col mt-[15vh] gap-y-[10vh]"> 
-          <h2 className="self-start text-4xl oswald-font font-extrabold text-text-primary">
-            <span className="macha-text-green text-7xl">COMPÉTENCES</span>
+      {/* ---- SECTION COMPÉTENCES ------------------- */}
+      <section ref={(el) => (sectionsRef.current[1] = el)} className="relative bg-black flex flex-col items-center justify-start gap-10 w-full min-h-screen lg:min-h-[125vh] pb-100 z-2" id="skills">
+        <div className="flex flex-col mt-[15vh] gap-y-[10vh] px-5 w-full max-w-7xl"> 
+          <h2 className="self-center md:self-start text-4xl oswald-font font-extrabold text-text-primary">
+            <span className="macha-text-green text-5xl md:text-7xl">COMPÉTENCES</span>
           </h2>
           <SkillGrid />
         </div>
       </section>
 
-      {/* ─── SECTION PROJETS ───────────────────────── */}
-      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-[125vh] bg-bg-primary z-3" id="projects">
+      {/* ---- SECTION PROJETS ---------------------- */}
+      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-screen lg:min-h-[125vh] bg-bg-primary z-3" id="projects">
         <div className="flex flex-col  items-center gap-10 w-full  px-5">
-          <div className="flex justify-center mt-[5vh] gap-x-[30vw] items-center  w-full">
-            <h2 className="text-4xl  font-extrabold oswald-font text-text-primary">
-              <span className="macha-text-green  text-7xl">PROJETS</span>
+          <div className="flex flex-col md:flex-row justify-between mt-[5vh] items-center w-full max-w-7xl gap-8 px-5">
+            <h2 className="text-4xl font-extrabold oswald-font text-text-primary text-center md:text-left">
+              <span className="macha-text-green text-5xl md:text-7xl">PROJETS</span>
             </h2>
             <MachaButton label="Voir tout =>" to="/projets" extraClassName="" />
           </div>
@@ -99,36 +143,101 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── SECTION CONTACT ───────────────────────── */}
-      <section ref={(el) => (sectionsRef.current[3] = el)} className="relative flex flex-col items-center justify-center w-full min-h-[125vh] bg-black z-4" id="contacts">
-        <div className="flex flex-col gap-5 w-full max-w-[1100px] px-5">
-          <h2 className="text-4xl font-semibold text-text-primary">
-            <span className="green-text">#</span>contact
-          </h2>
-          <div className="flex w-full mt-5 max-lg:flex-col max-lg:gap-5">
-            <p className="text-text-secondary max-w-[600px] text-[17px]">
-              Vous pouvez me contacter pour toute question ou opportunité d'alternance ou de stage en service
-              informatique.
+      {/*---- SECTION CONTACT ------------------------ */}
+      <section ref={(el) => (sectionsRef.current[3] = el)} className="relative flex flex-col items-center justify-start gap-10 w-full min-h-screen lg:min-h-[125vh] bg-black z-4 pb-20" id="contacts">
+        <div className="flex flex-col items-center gap-10 w-full px-5">
+          <div className="flex justify-center mt-[5vh] items-center w-full mb-5 text-center">
+            <h2 className="text-4xl font-extrabold oswald-font text-text-primary">
+              <span className="macha-text-green text-5xl md:text-7xl">COLLABORONS</span>
+            </h2>
+          </div>
+
+          <div className="flex flex-col w-full max-w-3xl items-center mt-5">
+            <p className="text-text-secondary text-center mb-8 text-lg max-w-[600px]">
+              N'hésitez pas à me contacter pour toute question ou opportunité d'alternance ou de stage en service informatique.
             </p>
-            <div className="flex flex-col ml-auto p-5 border border-border gap-4 max-lg:ml-0 max-lg:w-full">
-              <h3 className="text-xl text-text-primary font-bold">Contactez-moi ici</h3>
-              <div className="flex flex-col gap-2.5">
-                <div className="flex items-center gap-2.5">
-                  <img className="w-[30px] invert" src="/logo/mail_icon.svg" alt="Email" />
-                  <a href="mailto:aimenesaoud@gmail.com" className="text-text-primary hover:text-accent transition-colors">
-                    aimenesaoud@gmail.com
-                  </a>
+
+            {status === 'success' && (
+              <div className="bg-green-900/30 border border-green-500 text-green-400 px-4 py-3 rounded w-full mb-5">
+                Message envoyé avec succès !
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="bg-red-900/30 border border-red-500 text-red-400 px-4 py-3 rounded w-full mb-5">
+                Erreur lors de l'envoi du message. Veuillez réessayer.
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-0 w-full">
+              <div className="flex gap-4 max-sm:flex-col">
+                <div className="relative flex-1 mb-5">
+                  <input
+                    className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors placeholder:text-text-secondary/50"
+                    type="text" name="nom" placeholder="Nom*" required maxLength={400}
+                    value={formData.nom} onChange={handleChange}
+                  />
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <img className="w-[30px] invert" src="/logo/form-send.svg" alt="Formulaire" />
-                  <MachaButton label="Formulaire de contact" to="/contact" />
+                <div className="relative flex-1 mb-5">
+                  <input
+                    className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors placeholder:text-text-secondary/50"
+                    type="text" name="prenom" placeholder="Prénom" maxLength={400}
+                    value={formData.prenom} onChange={handleChange}
+                  />
                 </div>
               </div>
-            </div>
+
+              <div className="relative mb-5">
+                <input
+                  className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors placeholder:text-text-secondary/50"
+                  type="email" name="email" placeholder="Adresse Email*" required maxLength={400}
+                  value={formData.email} onChange={handleChange}
+                />
+              </div>
+
+              <div className="relative mb-5">
+                <input
+                  className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors placeholder:text-text-secondary/50"
+                  type="tel" name="tel" placeholder="N° de téléphone portable" maxLength={400}
+                  value={formData.tel} onChange={handleChange}
+                />
+              </div>
+
+              <div className="relative mb-5">
+                <input
+                  className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors placeholder:text-text-secondary/50"
+                  type="text" name="societe" placeholder="Votre société*" required maxLength={400}
+                  value={formData.societe} onChange={handleChange}
+                />
+              </div>
+
+              <div className="relative mb-5">
+                <textarea
+                  className="w-full bg-transparent text-text-primary text-lg px-4 py-3 border-b border-text-secondary/30 outline-none focus-visible:outline-none focus:border-[#abff84] transition-colors resize-y min-h-[120px] placeholder:text-text-secondary/50"
+                  name="message" placeholder="Votre message*" required rows={4}
+                  value={formData.message} onChange={handleChange}
+                />
+              </div>
+
+              <small className="text-text-secondary mb-4">* Champ Obligatoire</small>
+
+              <div className="flex items-start gap-2 mb-6">
+                <input type="checkbox" required className="mt-1 accent-[#abff84]" />
+                <p className="text-text-secondary text-sm">
+                  En soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter.
+                </p>
+              </div>
+
+              <MachaButton 
+                label={loading ? 'ENVOI...' : 'ENVOYER'} 
+                type="submit" 
+                extraClassName={`self-center mt-2 ${loading ? 'opacity-50 pointer-events-none' : ''}`} 
+              />
+            </form>
           </div>
         </div>
       </section>
     </main>
+    <Footer />
     <Socials />
     </>
   );
