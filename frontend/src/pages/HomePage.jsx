@@ -9,7 +9,7 @@ import { useLottie } from 'lottie-react';
 import AnimatedWaves from '../assets/wave_animation.json';
 import MachaButton from '../components/MachaButton';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '');
 
 export default function HomePage() {
   const containerRef = useRef(null);
@@ -220,12 +220,12 @@ export default function HomePage() {
 
               <small className="text-text-secondary mb-4">* Champ Obligatoire</small>
 
-              <div className="flex items-start gap-2 mb-6">
-                <input type="checkbox" required className="mt-1 accent-[#abff84]" />
-                <p className="text-text-secondary text-sm">
+              <label className="flex items-start gap-3 mb-6 cursor-pointer group">
+                <input type="checkbox" required className="mt-1 w-5 h-5 cursor-pointer accent-[#abff84] shrink-0" />
+                <span className="text-text-secondary text-sm group-hover:text-text-primary transition-colors">
                   En soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter.
-                </p>
-              </div>
+                </span>
+              </label>
 
               <MachaButton 
                 label={loading ? 'ENVOI...' : 'ENVOYER'} 
