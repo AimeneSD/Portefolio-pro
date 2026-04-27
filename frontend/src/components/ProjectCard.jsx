@@ -20,7 +20,7 @@ export default function ProjectCard({ projet }) {
         {/* Image */}
         <img
           className="w-full object-contain"
-          src={`/images/${projet.image}`}
+          src={`${import.meta.env.BASE_URL}${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`}
           alt={`Image du projet ${projet.titre}`}
         />
 
@@ -36,10 +36,10 @@ export default function ProjectCard({ projet }) {
             {techLogos.map((tech) => (
               <img
                 key={tech}
-                src={`/logo/${tech}.svg`}
+                src={`${import.meta.env.BASE_URL}logo/${tech}.svg`}
                 onError={(e) => {
                   if (e.target.src.endsWith('.svg')) {
-                    e.target.src = `/logo/${tech}.webp`;
+                    e.target.src = `${import.meta.env.BASE_URL}logo/${tech}.webp`;
                   } else {
                     e.target.style.display = 'none';
                   }
