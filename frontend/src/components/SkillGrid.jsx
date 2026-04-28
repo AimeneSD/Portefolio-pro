@@ -58,7 +58,7 @@ const skillCategories = [
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SkillGrid({ showLevel = false, extraClassName = '' }) {
+export default function SkillGrid({ extraClassName = '' }) {
   const containerRef = useRef(null);
   const categoryRefs = useRef([]);
 

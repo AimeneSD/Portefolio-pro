@@ -58,8 +58,19 @@ app.delete('/api/admin/projects/:id', deleteProject);
 // ─── Servir le frontend buildé (production) ───────
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// Toutes les routes non-API renvoient vers index.html (SPA React Router)
-app.get('/{*splat}', (req, res) => {
+// ─── Route de Santé (Keep-Alive) ──────────────────
+app.get('/api/health', async (req, res) => {
+  try {
+    const pool = require('./Model/db');
+    await pool.query('SELECT 1');
+    res.status(200).json({ status: 'ok', message: 'Database is alive' });
+  } catch (err) {
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+});
+
+// toutes les routes non-API renvoient vers index.html (SPA React Router)
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
