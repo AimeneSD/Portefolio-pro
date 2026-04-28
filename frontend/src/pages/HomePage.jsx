@@ -115,9 +115,9 @@ export default function HomePage() {
         <div className="flex flex-col z-0 justify-center items-center md:items-start mr-auto gap-y-10 px-5 md:ml-[10vw] max-lg:mr-0 mt-[10vh] md:mt-0 w-full md:w-auto">
           <div className="flex-1 flex flex-col gap-y-5 items-center md:items-start">
             <h1 className="text-text-primary max-w-full lg:max-w-[400px] font-bold leading-tight text-center md:text-left">
-            <span className="macha-text-green text-6xl sm:text-7xl md:text-9xl">Aïmène SAOUD</span>
+            <span className="macha-text-green  text-6xl sm:text-7xl md:text-9xl">Aïmène SAOUD</span>
             </h1>
-            <h2 className="text-xl md:text-2xl text-text-primary text-center md:text-left">
+            <h2 className="text-xl md:text-2xl grotesk-font text-text-primary text-center md:text-left">
               Technicien spécialisé dans les <span className="macha-text-green">services informatiques</span>
             </h2>
             <p className="text-text-secondary text-base md:text-lg max-w-[700px] text-center md:text-left">

@@ -27,21 +27,38 @@ export default function App() {
     });
 
     // 2. Synchronisation de Lenis avec ScrollTrigger
-    // Ça permet de s'assurer que tes animations GSAP restent synchronisées avec le scroll fluide
     lenis.on('scroll', ScrollTrigger.update);
 
     // 3. Demander à GSAP de s'occuper de la boucle de rafraîchissement de Lenis
-    gsap.ticker.add((time) => {
+    const tickerUpdate = (time) => {
       lenis.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(tickerUpdate);
 
     // Évite les sauts si l'onglet reste inactif un moment
     gsap.ticker.lagSmoothing(0);
 
-    // 4. Nettoyage quand le composant est démonté (important dans React)
+    // 4. Gestion des liens d'ancrage (#contacts, #skills, etc.)
+    const handleAnchorClick = (e) => {
+      const link = e.target.closest('a');
+      // On ne gère que les liens internes (même origine et même chemin) avec un hash
+      if (
+        link &&
+        link.hash &&
+        link.origin === window.location.origin &&
+        link.pathname === window.location.pathname
+      ) {
+        e.preventDefault();
+        lenis.scrollTo(link.hash);
+      }
+    };
+    document.addEventListener('click', handleAnchorClick);
+
+    // 5. Nettoyage quand le composant est démonté (important dans React)
     return () => {
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      gsap.ticker.remove(tickerUpdate);
+      document.removeEventListener('click', handleAnchorClick);
     };
   }, []);
 
