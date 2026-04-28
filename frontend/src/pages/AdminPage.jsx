@@ -10,6 +10,10 @@ export default function AdminPage() {
   });
   const [message, setMessage] = useState('');
   const [projets, setProjets] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+
+  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
   const loadProjets = () => {
     fetch(`${API_URL}/api/projects`)
@@ -18,7 +22,34 @@ export default function AdminPage() {
       .catch(console.error);
   };
 
-  useEffect(() => { loadProjets(); }, []);
+  useEffect(() => { 
+    if (isAuthenticated) loadProjets(); 
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated) {
+    return (
+      <main className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+        <h1 className="text-3xl oswald-font font-extrabold text-text-primary">Accès Restreint</h1>
+        <div className="flex flex-col gap-4 w-full max-w-sm px-6">
+          <input 
+            type="password" 
+            className="w-full bg-transparent text-lg px-4 py-3 border-b border-fuchsia-300 outline-none" 
+            placeholder="Mot de passe admin"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && passwordInput === ADMIN_PASSWORD && setIsAuthenticated(true)}
+          />
+          <MachaButton 
+            label="Se connecter" 
+            onClick={() => {
+              if (passwordInput === ADMIN_PASSWORD) setIsAuthenticated(true);
+              else alert('Mot de passe incorrect');
+            }} 
+          />
+        </div>
+      </main>
+    );
+  }
 
   const handleChange = (e) => {
     if (e.target.type === 'file') {
