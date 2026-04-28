@@ -11,6 +11,7 @@ import ContactPage from './pages/ContactPage';
 import VeillePage from './pages/VeillePage';
 import StagePage from './pages/StagePage';
 import AdminPage from './pages/AdminPage';
+import MentionsLegales from './pages/MentionsLegales';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +56,7 @@ export default function App() {
           <Route path="/veille" element={<VeillePage />} />
           <Route path="/stage" element={<StagePage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
         </Routes>
       </div>
       <Footer />

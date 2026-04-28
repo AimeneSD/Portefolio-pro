@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -233,7 +234,7 @@ export default function HomePage() {
               <label className="flex items-start gap-3 mb-6 cursor-pointer group">
                 <input type="checkbox" required className="mt-1 w-5 h-5 cursor-pointer accent-[#abff84] shrink-0" />
                 <span className="text-text-secondary text-sm group-hover:text-text-primary transition-colors">
-                  En soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter.
+                  En soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter conformément aux <Link to="/mentions-legales" className="macha-text-green underline hover:text-accent">Mentions Légales</Link>.
                 </span>
               </label>
 
