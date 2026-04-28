@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectCard from '../components/ProjectCard';
@@ -13,7 +12,6 @@ import MachaButton from '../components/MachaButton';
 const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '');
 
 export default function HomePage() {
-  const containerRef = useRef(null);
   const sectionsRef = useRef([]);
   const [projets, setProjets] = useState([]);
 
@@ -179,7 +177,7 @@ export default function HomePage() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-0 w-full">
+            <form onSubmit={handleSubmit} className="flex flex-col grotesk-font gap-0 w-full">
               <div className="flex gap-4 max-sm:flex-col">
                 <div className="relative flex-1 mb-5">
                   <input
