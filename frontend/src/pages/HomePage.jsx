@@ -104,7 +104,7 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="flex flex-col  w-full mb-[80px] ">
+      <main className="flex flex-col  w-full ">
       {/* ---- SECTION PRÉSENTATION ------------------- */}
       <section ref={(el) => (sectionsRef.current[0] = el)} className="relative flex flex-col gap-10 min-h-screen lg:min-h-[125vh] bg-mist-950 justify-center max-lg:flex-col  overflow-hidden z-1" id="presentation">
         {/* ---- Wave Animation Background ──── */}
