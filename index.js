@@ -70,7 +70,7 @@ app.get('/api/health', async (req, res) => {
 });
 
 // toutes les routes non-API renvoient vers index.html (SPA React Router)
-app.get('/:path*', (req, res) => {
+app.get('(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
