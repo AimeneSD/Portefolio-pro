@@ -106,7 +106,7 @@ export default function HomePage() {
     <>
       <main className="flex flex-col  w-full mb-[80px] ">
       {/* ---- SECTION PRÉSENTATION ------------------- */}
-      <section ref={(el) => (sectionsRef.current[0] = el)} className="relative flex flex-col gap-10 min-h-screen lg:min-h-[125vh] bg-mist-950 justify-center max-lg:flex-col  overflow-hidden z-[1]" id="presentation">
+      <section ref={(el) => (sectionsRef.current[0] = el)} className="relative flex flex-col gap-10 min-h-screen lg:min-h-[125vh] bg-mist-950 justify-center max-lg:flex-col  overflow-hidden z-1" id="presentation">
         {/* ---- Wave Animation Background ──── */}
         <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 opacity-15 z-0 pointer-events-none">
           {WaveAnimation}
@@ -130,7 +130,7 @@ export default function HomePage() {
 
       {/* ---- SECTION COMPÉTENCES ------------------- */}
       <section ref={(el) => (sectionsRef.current[1] = el)} className="relative bg-black flex flex-col items-center justify-start gap-10 w-full min-h-screen lg:min-h-[125vh] pb-100 z-2" id="skills">
-        <div className="flex flex-col mt-[15vh] gap-y-[10vh] px-5 w-full max-w-7xl"> 
+        <div className="flex flex-col mt-[15vh] gap-y-[10vh] px-5 w-full max-w-7xl">
           <h2 className="self-center md:self-start text-4xl oswald-font font-extrabold text-text-primary">
             <span className="macha-text-green text-5xl md:text-7xl">COMPÉTENCES</span>
           </h2>

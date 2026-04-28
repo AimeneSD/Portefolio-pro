@@ -52,13 +52,13 @@ export default function Header() {
 
         {/* ─── Hamburger (mobile) ─────────── */}
         <button
-          className="flex lg:hidden flex-col gap-[5px] mr-[4vw] ml-auto cursor-pointer z-1200"
+          className="flex lg:hidden flex-col gap-[5px] mr-[5vw] ml-auto cursor-pointer z-1200"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu de navigation"
         >
-          <span className={`w-[30px] h-[3.5px] bg-green-500 transition-all duration-300 ${menuOpen ? 'translate-y-[8.5px] rotate-45' : ''}`} />
-          <span className={`w-[30px] h-[3.5px] bg-green-500 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-[30px] h-[3.5px] bg-green-500 transition-all duration-300 ${menuOpen ? 'translate-y-[8.5px] -rotate-45' : ''}`} />
+          <span className={`w-[25px] h-[3.5px] bg-green-500 transition-all duration-300 ${menuOpen ? 'translate-y-[7.8px] rotate-45' : ''}`} />
+          <span className={`w-[25px] h-[3.5px] bg-green-500 transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
+          <span className={`w-[25px] h-[3.5px] bg-green-500 transition-all duration-300 ${menuOpen ? 'translate-y-[7px] -rotate-45' : ''}`} />
         </button>
 
         {/* ─── Navigation links ──────────── */}
