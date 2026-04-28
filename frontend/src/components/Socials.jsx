@@ -24,7 +24,7 @@ const socials = [
   {
     id: 'resume',
     label: 'CV',
-    href: '/fichiers/CV_aimene_saoud_technicien_info.pdf',
+    href: `${import.meta.env.BASE_URL}fichiers/CV_aimene_saoud_technicien_info.pdf`,
     color: '#049f19',
     svg: (
       <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} fill="currentColor" viewBox="0 0 16 16" className="relative z-10 w-[30px] h-[30px]">

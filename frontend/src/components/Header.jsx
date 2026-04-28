@@ -42,7 +42,7 @@ export default function Header() {
         <Link to="/" className="flex items-center gap-2.5 ml-[2vw]" id="header-logo">
           <img
             className={`w-10 h-auto object-contain invert transition-transform duration-500 ${scrolled ? 'scale-90' : 'scale-100'}`}
-            src="/images/portfolio_icon.webp"
+            src={`${import.meta.env.BASE_URL}images/portfolio_icon.webp`}
             alt="Logo portfolio"
           />
           <h1 className={`text-text-primary font-bold transition-all duration-500 ${scrolled ? 'text-base' : 'text-lg'}`}>

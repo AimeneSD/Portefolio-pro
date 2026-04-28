@@ -10,13 +10,25 @@ export default function ProjectsPage() {
   useEffect(() => {
     fetch(`${API_URL}/api/projects?category=web`)
       .then((res) => res.json())
-      .then((data) => setProjetsWeb(data))
-      .catch((err) => console.error('Erreur projets web:', err));
+      .then((data) => {
+        if (Array.isArray(data)) setProjetsWeb(data);
+        else setProjetsWeb([]);
+      })
+      .catch((err) => {
+        console.error('Erreur projets web:', err);
+        setProjetsWeb([]);
+      });
 
     fetch(`${API_URL}/api/projects?category=reseau`)
       .then((res) => res.json())
-      .then((data) => setProjetsReseau(data))
-      .catch((err) => console.error('Erreur projets réseau:', err));
+      .then((data) => {
+        if (Array.isArray(data)) setProjetsReseau(data);
+        else setProjetsReseau([]);
+      })
+      .catch((err) => {
+        console.error('Erreur projets réseau:', err);
+        setProjetsReseau([]);
+      });
   }, []);
 
   return (
@@ -29,7 +41,7 @@ export default function ProjectsPage() {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
-          {projetsWeb.map((p) => (
+          {Array.isArray(projetsWeb) && projetsWeb.map((p) => (
             <ProjectCard key={p.id} projet={p} />
           ))}
         </div>
@@ -43,7 +55,7 @@ export default function ProjectsPage() {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
-          {projetsReseau.map((p) => (
+          {Array.isArray(projetsReseau) && projetsReseau.map((p) => (
             <ProjectCard key={p.id} projet={p} />
           ))}
         </div>

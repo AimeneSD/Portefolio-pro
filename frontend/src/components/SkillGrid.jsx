@@ -101,12 +101,12 @@ export default function SkillGrid({ showLevel = false, extraClassName = '' }) {
         <div 
           key={cat.title} 
           ref={(el) => (categoryRefs.current[index] = el)}
-          className="flex flex-col lg:flex-row gap-8 lg:gap-x-[5vw] items-center lg:items-start w-full max-w-5xl px-5"
+          className="flex flex-col lg:flex-row gap-8 lg:gap-x-12 items-center lg:items-start w-full max-w-6xl "
         >
-          <h3 className="text-4xl lg:text-5xl text-neutral-300 oswald-font text-center lg:text-left lg:max-w-[20vw] lg:w-[20vw] font-bold mb-2">
+          <h3 className="text-4xl lg:text-5xl text-neutral-300 oswald-font text-center lg:text-left lg:w-[350px] flex-shrink-0 font-bold mb-2">
             {cat.title}
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-8 lg:gap-x-20 justify-items-center content-start w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-8 lg:gap-x-16 justify-items-center lg:justify-items-start content-start w-full">
             {cat.skills.map((skill) => (
               <div
                 key={skill.name}
@@ -114,7 +114,7 @@ export default function SkillGrid({ showLevel = false, extraClassName = '' }) {
               >
                 <img
                   className="h-12 w-10 md:h-15 md:w-10 object-contain"
-                  src={`/logo/${skill.logo}.${skill.ext || 'svg'}`}
+                  src={`${import.meta.env.BASE_URL}logo/${skill.logo}.${skill.ext || 'svg'}`}
                   alt={`${skill.name} Logo`}
                 />
                 <h4 className="text-text-primary text-center md:text-left max-w-20 grotesk-font text-sm md:text-lg">{skill.name}</h4>

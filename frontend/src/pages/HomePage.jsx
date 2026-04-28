@@ -55,8 +55,18 @@ export default function HomePage() {
   useEffect(() => { // Fetch des projets
     fetch(`${API_URL}/api/projects/recent`)
     .then((res) => res.json())
-    .then((data) => setProjets(data))
-    .catch((err) => console.error('Erreur chargement projets:', err));}, []);
+    .then((data) => {
+      if (Array.isArray(data)) {
+        setProjets(data);
+      } else {
+        console.error('Données reçues non valides:', data);
+        setProjets([]);
+      }
+    })
+    .catch((err) => {
+      console.error('Erreur chargement projets:', err);
+      setProjets([]);
+    });}, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -138,7 +148,7 @@ export default function HomePage() {
             <MachaButton label="Voir tout =>" to="/projets" extraClassName="" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-center w-full">
-            {projets.map((p) => <ProjectCard key={p.id} projet={p} />)}
+            {Array.isArray(projets) && projets.map((p) => <ProjectCard key={p.id} projet={p} />)}
           </div>
         </div>
       </section>

@@ -1,4 +1,16 @@
+# Dépendances
 node_modules/
-.env
+**/node_modules/
+
+# Build
 frontend/dist/
-/frontend/node_modules
+dist/
+
+# Environnement (Fichiers secrets)
+.env
+.env.*
+frontend/.env*
+
+# Divers
+.DS_Store
+.vscode/
