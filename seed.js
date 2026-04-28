@@ -18,7 +18,7 @@ CREATE TABLE projets (
 INSERT INTO projets (id, titre, description, categorie, technos, lien, image) VALUES
 (1, 'Login System', 'Application web permettant de créer des comptes utilisateurs, se connecter, de visualiser ses informations et de réinitialiser son mot de passe ', 'web', 'php,css,mysql', 'https://sioslam.com/27_SAOUD/td5/', '1777306090990-420549433-login_system_preview.png'),
 (2, 'Calculator Project', 'Calculatrice web développée en Vanilla JS incluant les fonctions racine carré, les exposants et les parenthèses ', 'web', 'js,css', 'https://sioslam.com/27_SAOUD/CalculatorProject/', '1777309237991-335078047-Calculator_screenshot.webp'),
-(3, 'Documentation d''installation GLPI', 'Déploiement d''une solution de ticketing et mise en place d''un inventaire automatisé sous serveur virtuel ', 'reseau', 'linux, virtualbox, bash', '/27_SAOUD/fichiers/Doc_GLPI_Debian.pdf', '1777310511075-992831922-Image_Doc_GLPI_Debian.webp');
+(3, 'Documentation d''installation GLPI', 'Déploiement d''une solution de ticketing et mise en place d''un inventaire automatisé sous serveur virtuel ', 'reseau', 'linux, virtualbox, bash', '27_SAOUD/fichiers/Doc_GLPI_Debian.pdf', '1777310511075-992831922-Image_Doc_GLPI_Debian.webp');
 `;
 
 async function seed() {
