@@ -31,10 +31,11 @@ const skillCategories = [
     ],
   },
   {
-    title: 'INFRASTRUCTURE',
+    title: 'INFRASTRUCTURE & SUPPORT',
     skills: [
       { name: 'Linux', logo: 'linux' },
       { name: 'Windows Server', logo: 'windows' },
+      { name: 'GLPI', logo: 'glpi', ext:'webp'}
     ],
   },
   {

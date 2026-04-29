@@ -165,7 +165,7 @@ export default function HomePage() {
             </p>
 
             {status === 'success' && (
-              <div className="bg-green-900/30 border border-green-500 text-green-400 px-4 py-3 rounded w-full mb-5">
+              <div className="bg-green-900/30 border border-green-500 text-green-400 text-center px-4 py-3 rounded w-full mb-5">
                 Message envoyé avec succès !
               </div>
             )}
