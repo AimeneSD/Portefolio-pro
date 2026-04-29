@@ -14,9 +14,7 @@ class ContactModel {
     const userPass = process.env.EMAIL_PASS || process.env.SMTP_PASS;
 
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
+      service: 'gmail',
       auth: {
         user: userEmail,
         pass: userPass,
