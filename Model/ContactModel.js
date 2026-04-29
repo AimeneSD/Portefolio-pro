@@ -15,13 +15,14 @@ class ContactModel {
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
+      port: 587,
+      secure: false,
       auth: {
         user: userEmail,
         pass: userPass,
       },
       family: 4, // Force IPv4 pour éviter l'erreur ENETUNREACH sur Render
+      connectionTimeout: 20000, // Réduit le temps d'attente avant timeout
       debug: true, // Affiche les détails dans les logs
       logger: true // Log les échanges SMTP
     });
