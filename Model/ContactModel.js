@@ -9,9 +9,9 @@ class ContactModel {
   static async sendEmail(data) {
     const { nom, prenom, email, tel, societe, message } = data;
 
-    // Supporte à la fois EMAIL_USER (local) et SMTP_USER (Render)
-    const userEmail = process.env.EMAIL_USER || process.env.SMTP_USER;
-    const userPass = process.env.EMAIL_PASS || process.env.SMTP_PASS;
+    // Utilise les mêmes noms qu'en production sur Render
+    const userEmail = process.env.SMTP_USER;
+    const userPass = process.env.SMTP_PASS;
 
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
