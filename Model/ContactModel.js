@@ -14,11 +14,16 @@ class ContactModel {
     const userPass = process.env.EMAIL_PASS || process.env.SMTP_PASS;
 
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: userEmail,
         pass: userPass,
       },
+      family: 4, // Force IPv4 pour éviter l'erreur ENETUNREACH sur Render
+      debug: true, // Affiche les détails dans les logs
+      logger: true // Log les échanges SMTP
     });
 
     const htmlBody = `
