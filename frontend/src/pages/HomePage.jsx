@@ -74,27 +74,25 @@ export default function HomePage() {
 
     // On applique cet effet sur tous les écrans (mobiles inclus)
     mm.add("(min-width: 320px)", () => {
-      sectionsRef.current.forEach((section) => {
-        if (section) {
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
-              end: () => `+=${window.innerHeight}`, // La durée de l'effet correspond à la hauteur de l'écran
-              pin: true,
-              pinSpacing: false,
-              scrub: 1, // On ajoute un scrub de 1 seconde pour lisser le mouvement
-              invalidateOnRefresh: true,
-            }
-          });
+      const sections = sectionsRef.current.filter(Boolean);
+      sections.forEach((section, index) => {
+        const isLast = index === sections.length - 1;
+        
+        // On ne fige pas la dernière section pour éviter le scroll vide inutile avant le footer
+        if (isLast) return;
 
-          // Parallax effect: We move the children of the section upwards slowly
-          // This gives the impression that the section continues to scroll, but slower
-          tl.to(section.children, {
-            y: () => -window.innerHeight * 0.4, // Remonte de 40% de la taille de l'écran
-            ease: "none"
-          });
-        }
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            // On fige la section dès qu'elle a fini d'être lue
+            start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
+            end: () => `+=${window.innerHeight}`, 
+            pin: true,
+            pinSpacing: false,
+            scrub: true,
+            invalidateOnRefresh: true,
+          }
+        });
       });
     });
 
@@ -138,7 +136,7 @@ export default function HomePage() {
       </section>
 
       {/* ---- SECTION PROJETS ---------------------- */}
-      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-screen lg:min-h-[125vh] max-md:min-h-[150vh] bg-bg-primary z-3" id="projects">
+      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-screen lg:min-h-[125vh] max-md:min-h-[200vh] bg-bg-primary z-3" id="projects">
         <div className="flex flex-col  items-center gap-10 w-full  px-5">
           <div className="flex flex-col md:flex-row justify-between mt-[5vh] items-center w-full max-w-7xl gap-8 px-5">
             <h2 className="text-4xl font-extrabold oswald-font text-text-primary text-center md:text-left">
@@ -153,7 +151,7 @@ export default function HomePage() {
       </section>
 
       {/*---- SECTION CONTACT ------------------------ */}
-      <section ref={(el) => (sectionsRef.current[3] = el)} className="relative flex flex-col items-center justify-start gap-10 w-full min-h-screen lg:min-h-[125vh] bg-black z-4 pb-20" id="contacts">
+      <section ref={(el) => (sectionsRef.current[3] = el)} className="relative flex flex-col items-center justify-start gap-10 w-full min-h-screen bg-black z-4 pb-20" id="contacts">
         <div className="flex flex-col items-center gap-10 w-full px-5">
           <div className="flex justify-center mt-[5vh] items-center w-full mb-5 text-center">
             <h2 className="text-4xl font-extrabold oswald-font text-text-primary">

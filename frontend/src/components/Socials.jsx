@@ -48,9 +48,8 @@ const socials = [
 
 const Socials = () => {
   return (
-    <ul className="flex flex-col fixed top-4/5 right-0 mr-4 -translate-y-1/2 items-center gap-0 list-none z-10">
+    <ul className="flex flex-col fixed top-4/5 max-md:top-2/7 right-0  mr-4 -translate-y-1/2 items-center gap-0 list-none z-10">
       {socials.map((s) => {
-        const bg = s.color;
         const bgStyle = { backgroundColor: s.color };
 
         return (
