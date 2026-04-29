@@ -9,13 +9,17 @@ class ContactModel {
   static async sendEmail(data) {
     const { nom, prenom, email, tel, societe, message } = data;
 
+    // Supporte à la fois EMAIL_USER (local) et SMTP_USER (Render)
+    const userEmail = process.env.EMAIL_USER || process.env.SMTP_USER;
+    const userPass = process.env.EMAIL_PASS || process.env.SMTP_PASS;
+
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: userEmail,
+        pass: userPass,
       },
     });
 
@@ -31,9 +35,9 @@ class ContactModel {
     `;
 
     const mailOptions = {
-      from: `"Formulaire de Contact" <${process.env.SMTP_USER}>`,
+      from: `"Formulaire de Contact" <${userEmail}>`,
       replyTo: `${nom} ${prenom || ''} <${email}>`,
-      to: process.env.SMTP_USER,
+      to: userEmail,
       subject: 'Contact via Portefolio',
       html: htmlBody,
       text: `Nom: ${nom}\nPrénom: ${prenom}\nEmail: ${email}\nTéléphone: ${tel}\nSociété: ${societe}\nMessage: ${message}`,

@@ -152,7 +152,7 @@ export default function HomePage() {
 
       {/*---- SECTION CONTACT ------------------------ */}
       <section ref={(el) => (sectionsRef.current[3] = el)} className="relative flex flex-col items-center justify-start gap-10 w-full min-h-screen bg-black z-4 pb-20" id="contacts">
-        <div className="flex flex-col items-center gap-10 w-full px-5">
+        <div className="flex flex-col items-center gap-10 w-full mt-15 px-5">
           <div className="flex justify-center mt-[5vh] items-center w-full mb-5 text-center">
             <h2 className="text-4xl font-extrabold oswald-font text-text-primary">
               <span className="macha-text-green text-5xl md:text-7xl">COLLABORONS</span>
