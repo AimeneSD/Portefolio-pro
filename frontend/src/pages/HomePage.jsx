@@ -16,7 +16,7 @@ export default function HomePage() {
   const [projets, setProjets] = useState([]);
 
   // --- Contact Form State ---
-  const [formData, setFormData] = useState({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '' });
+  const [formData, setFormData] = useState({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '', accepte: false });
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +34,7 @@ export default function HomePage() {
       const data = await res.json();
       if (res.ok && data.success) {
         setStatus('success');
-        setFormData({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '' });
+        setFormData({ nom: '', prenom: '', email: '', tel: '', societe: '', message: '', accepte: false });
       } else {
         setStatus('error');
       }
@@ -65,7 +65,13 @@ export default function HomePage() {
     .catch((err) => {
       console.error('Erreur chargement projets:', err);
       setProjets([]);
-    });}, []);
+    })
+    .finally(() => {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 300);
+    });
+  }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -228,7 +234,14 @@ export default function HomePage() {
               <small className="text-text-secondary mb-4">* Champ Obligatoire</small>
 
               <label className="flex items-start gap-3 mb-6 cursor-pointer group">
-                <input type="checkbox" required className="mt-1 w-5 h-5 cursor-pointer accent-[#abff84] shrink-0" />
+                <input 
+                  type="checkbox" 
+                  name="accepte"
+                  required 
+                  checked={formData.accepte}
+                  onChange={(e) => setFormData({ ...formData, accepte: e.target.checked })}
+                  className="mt-1 w-5 h-5 cursor-pointer accent-[#abff84] shrink-0" 
+                />
                 <span className="text-text-secondary text-sm group-hover:text-text-primary transition-colors">
                   En soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter conformément aux <Link to="/mentions-legales" className="macha-text-green underline hover:text-accent">Mentions Légales</Link>.
                 </span>

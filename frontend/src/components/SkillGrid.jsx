@@ -114,7 +114,7 @@ export default function SkillGrid({ extraClassName = '' }) {
                 className="skill-item flex flex-col md:flex-row items-center gap-4 justify-center"
               >
                 <img
-                  className="h-12 w-10 md:h-15 md:w-10 object-contain"
+                  className="h-12 w-10 md:h-15 select-none md:w-10 object-contain"
                   src={`${import.meta.env.BASE_URL}logo/${skill.logo}.${skill.ext || 'svg'}`}
                   alt={`${skill.name} Logo`}
                 />

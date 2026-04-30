@@ -25,10 +25,12 @@
   * {
     margin: 0;
     padding: 0;
+
   }
 
   html {
     height: 100%;
+    cursor: url("./assets/cursor.png"), auto;
   }
 
   body {
@@ -42,7 +44,6 @@
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     letter-spacing: 0.2px;
-    cursor: url("./assets/cursor.png"), auto;
   }
 
   #root {
@@ -72,11 +73,14 @@
     color: inherit;
   }
   a:hover {
-    cursor: url("./assets/cursor.png"), pointer !important;
+    cursor: url("./assets/pointer.png"), pointer !important;
   }
-
-  button {
-    cursor: url("./assets/cursor.png"), pointer !important;
+  /* Pour tous les boutons */
+  button, 
+  input[type="submit"], 
+  input[type="button"], 
+  .cursor-pointer {
+      cursor: url("./assets/pointer.png"), pointer !important;
   }
 
   img {

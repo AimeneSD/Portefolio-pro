@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
@@ -25,6 +26,9 @@ export default function App() {
       wheelMultiplier: 0.7, // Vitesse de la molette
       smoothTouch: false, // En général on désactive sur mobile pour un feeling natif
     });
+
+    // On rend lenis accessible globalement pour le composant ScrollToTop
+    window.lenis = lenis;
 
     // 2. Synchronisation de Lenis avec ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
@@ -64,6 +68,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       <Header />
       <div className="flex-1">
         <Routes>
