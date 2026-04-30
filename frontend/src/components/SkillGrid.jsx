@@ -104,7 +104,7 @@ export default function SkillGrid({ extraClassName = '' }) {
           ref={(el) => (categoryRefs.current[index] = el)}
           className="flex flex-col lg:flex-row gap-8 lg:gap-x-12 items-center lg:items-start w-full max-w-6xl "
         >
-          <h3 className="text-4xl lg:text-5xl text-neutral-300 oswald-font text-center lg:text-left lg:w-[350px] flex-shrink-0 font-bold mb-2">
+          <h3 className="text-4xl lg:text-5xl text-neutral-300 oswald-font text-center lg:text-left lg:w-[350px] shrink-0 font-bold mb-2">
             {cat.title}
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-10 gap-y-8 lg:gap-x-16 justify-items-center lg:justify-items-start content-start w-full">

@@ -16,3 +16,4 @@ frontend/.env*
 .vscode/
 Login_System/
 Calculator-Project/
+frontend/public/fichiers/CV_*.pdf

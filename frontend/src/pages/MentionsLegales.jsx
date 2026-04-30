@@ -16,7 +16,7 @@ export default function MentionsLegales() {
           <div className="flex flex-col gap-4">
             <h2 className="text-2xl oswald-font font-bold text-text-primary uppercase tracking-wider">1. Édition du site</h2>
             <p className="grotesk-font">
-              Le présent site, accessible à l'URL <span className="text-text-primary">sioslam.com/27_SAOUD</span>, est édité par :<br />
+              Le présent site, est édité par :<br />
               <strong className="text-text-primary font-semibold">Aïmène Saoud</strong>, agissant en qualité d'étudiant en BTS SIO (Services Informatiques aux Organisations).<br />
               Contact : <a href="mailto:aimenesaoud@gmail.com" className="macha-text-green hover:underline">aimenesaoud@gmail.com</a>
             </p>
