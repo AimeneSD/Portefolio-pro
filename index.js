@@ -55,6 +55,10 @@ const upload = multer({ storage: storage });
 app.post('/api/admin/projects', upload.fields([{ name: 'image', maxCount: 1 }, { name: 'pdf', maxCount: 1 }]), createProject);
 app.delete('/api/admin/projects/:id', deleteProject);
 
+// ─── Servir les fichiers téléversés (images et documents) ────────
+app.use('/images', express.static(path.join(__dirname, 'frontend', 'public', 'images')));
+app.use('/documents', express.static(path.join(__dirname, 'frontend', 'public', 'documents')));
+
 // ─── Servir le frontend buildé (production) ───────
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
