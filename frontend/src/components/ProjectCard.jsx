@@ -2,6 +2,9 @@
  * Carte de projet réutilisable
  * @param {{ projet: { titre, description, lien, image, technos } }} props
  */
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '');
+const BASE_URL = import.meta.env.BASE_URL || '/';
+
 export default function ProjectCard({ projet }) {
   // Construit les logos des technos à partir de la chaîne "html,css,js"
   const techLogos = projet.technos
@@ -9,7 +12,7 @@ export default function ProjectCard({ projet }) {
     : [];
 
   // Déterminer le href : si lien commence par http, le garder tel quel, sinon préfixer
-  const href = projet.lien?.startsWith('http') ? projet.lien : `/${projet.lien || '#'}`;
+  const href = projet.lien?.startsWith('http') ? projet.lien : `${BASE_URL}${projet.lien || '#'}`;
 
   return (
     <div
@@ -20,8 +23,15 @@ export default function ProjectCard({ projet }) {
         {/* Image */}
         <img
           className="w-full object-contain"
-          src={`${import.meta.env.BASE_URL}${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`}
+          src={`${BASE_URL}${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`}
           alt={`Image du projet ${projet.titre}`}
+          onError={(e) => {
+            // Si l'image n'est pas sur Hostinger, on tente de la charger depuis le Backend (Render)
+            const backendUrl = `${API_URL}/${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`;
+            if (e.target.src !== backendUrl) {
+              e.target.src = backendUrl;
+            }
+          }}
         />
 
         {/* Contenu texte */}
@@ -36,10 +46,10 @@ export default function ProjectCard({ projet }) {
             {techLogos.map((tech) => (
               <img
                 key={tech}
-                src={`${import.meta.env.BASE_URL}logo/${tech}.svg`}
+                src={`${BASE_URL}logo/${tech}.svg`}
                 onError={(e) => {
                   if (e.target.src.endsWith('.svg')) {
-                    e.target.src = `${import.meta.env.BASE_URL}logo/${tech}.webp`;
+                    e.target.src = `${BASE_URL}logo/${tech}.webp`;
                   } else {
                     e.target.style.display = 'none';
                   }
