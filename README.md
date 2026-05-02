@@ -1,4 +1,4 @@
-# Portfolio Professionnel - Fullstack
+# Portfolio Professionnel
 
 Bienvenue sur le dépôt de mon portfolio professionnel. Ce projet est une application web moderne, performante et sécurisée, conçue pour mettre en avant mes compétences, mes projets et faciliter la prise de contact.
 
