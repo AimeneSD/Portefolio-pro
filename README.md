@@ -24,7 +24,7 @@ Bienvenue sur le dépôt de mon portfolio professionnel. Ce projet est une appli
 
 ---
 
-## 🚀 Mise en place locale
+## Mise en place locale
 
 ### Prérequis
 - Node.js (version 18+)
