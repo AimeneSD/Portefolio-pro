@@ -123,9 +123,9 @@ export default function AdminPage() {
             <input key={formData.pdf ? formData.pdf.name : 'empty-pdf'} className={inputClass} type="file" name="pdf" onChange={handleChange} />
           </div>
         </div>
-        
-        <input className={inputClass} type="text" name="technos" placeholder="Technos (ex: html,php,js)" value={formData.technos} onChange={handleChange} />
 
+        <input className={inputClass} type="text" name="technos" placeholder="Technos (ex: html,php,js)" value={formData.technos} onChange={handleChange} />
+        <span className="text-text-secondary text-sm ml-4 mb-1">Image du projet *</span>
         <input key={formData.image ? formData.image.name : 'empty'} className={inputClass} type="file" accept="image/*" name="image" required onChange={handleChange} />
         
         <MachaButton label="Ajouter" type="submit" extraClassName="self-start mt-2" />
