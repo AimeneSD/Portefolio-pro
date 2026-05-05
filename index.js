@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
     if (file.fieldname === 'image') {
       dir = path.join(__dirname, 'frontend', 'public', 'images');
     } else if (file.fieldname === 'pdf') {
-      dir = path.join(__dirname, 'frontend', 'public', 'documents');
+      dir = path.join(__dirname, 'frontend', 'public', 'fichiers');
     }
 
     // On s'assure que le dossier existe
@@ -57,7 +57,7 @@ app.delete('/api/admin/projects/:id', deleteProject);
 
 // ─── Servir les fichiers téléversés (images et documents) ────────
 app.use('/images', express.static(path.join(__dirname, 'frontend', 'public', 'images')));
-app.use('/documents', express.static(path.join(__dirname, 'frontend', 'public', 'documents')));
+app.use('/fichiers', express.static(path.join(__dirname, 'frontend', 'public', 'fichiers')));
 
 // ─── Servir le frontend buildé (production) ───────
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));

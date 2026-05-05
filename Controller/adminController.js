@@ -10,7 +10,7 @@ async function createProject(req, res) {
     let lien = req.body.lien;
     
     if (req.files && req.files['pdf']) {
-      lien = 'documents/' + req.files['pdf'][0].filename;
+      lien = 'fichiers/' + req.files['pdf'][0].filename;
     }
 
     const image = req.files && req.files['image'] ? req.files['image'][0].filename : req.body.image;
