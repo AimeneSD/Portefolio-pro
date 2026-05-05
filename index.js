@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
     } else if (file.fieldname === 'pdf') {
       dir = path.join(__dirname, 'frontend', 'public', 'documents');
     }
-    
+
     // On s'assure que le dossier existe
     if (dir && !fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

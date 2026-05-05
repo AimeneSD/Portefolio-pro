@@ -21,18 +21,20 @@ export default function ProjectCard({ projet }) {
     >
       <a href={href} target="_blank" rel="noopener noreferrer" className="flex flex-col h-full">
         {/* Image */}
-        <img
-          className="w-full object-contain"
-          src={`${BASE_URL}${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`}
-          alt={`Image du projet ${projet.titre}`}
-          onError={(e) => {
-            // Si l'image n'est pas sur Hostinger, on tente de la charger depuis le Backend (Render)
-            const backendUrl = `${API_URL}/${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`;
-            if (e.target.src !== backendUrl) {
-              e.target.src = backendUrl;
-            }
-          }}
-        />
+        <div className="w-full aspect-video overflow-hidden border-b border-border">
+          <img
+            className="w-full h-full object-cover"
+            src={`${BASE_URL}${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`}
+            alt={`Image du projet ${projet.titre}`}
+            onError={(e) => {
+              // Si l'image n'est pas sur Hostinger, on tente de la charger depuis le Backend (Render)
+              const backendUrl = `${API_URL}/${projet.image?.startsWith('images/') ? projet.image : `images/${projet.image}`}`;
+              if (e.target.src !== backendUrl) {
+                e.target.src = backendUrl;
+              }
+            }}
+          />
+        </div>
 
         {/* Contenu texte */}
         <div className="flex flex-col flex-1 min-h-[150px] border-border">
