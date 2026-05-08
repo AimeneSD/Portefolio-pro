@@ -142,7 +142,7 @@ export default function HomePage() {
       </section>
 
       {/* ---- SECTION PROJETS ---------------------- */}
-      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-screen lg:min-h-[125vh] max-md:min-h-[200vh] bg-bg-primary z-3" id="projects">
+      <section ref={(el) => (sectionsRef.current[2] = el)} className="relative flex flex-col items-center  w-full min-h-screen lg:min-h-screen max-md:min-h-[225vh] bg-bg-primary z-3" id="projects">
         <div className="flex flex-col  items-center gap-10 w-full  px-5">
           <div className="flex flex-col md:flex-row justify-between mt-[5vh] items-center w-full max-w-7xl gap-8 px-5">
             <h2 className="text-4xl font-extrabold oswald-font text-text-primary text-center md:text-left">

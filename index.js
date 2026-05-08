@@ -62,7 +62,7 @@ app.use('/fichiers', express.static(path.join(__dirname, 'frontend', 'public', '
 // ─── Servir le frontend buildé (production) ───────
 app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
-// ─── Route de Santé (Keep-Alive) ──────────────────
+// ─── Route de Santé (Pour garder le service de BDD allumé grâce à Uptimerobot)
 app.get('/api/health', async (req, res) => {
   try {
     const pool = require('./Model/db');
